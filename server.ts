@@ -12,8 +12,9 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json({ limit: '20mb' }));
-
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 // Shared Gemini client
 const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY || '',
