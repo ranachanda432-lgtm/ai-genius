@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 // Shared Gemini client
 const ai = new GoogleGenAI({
