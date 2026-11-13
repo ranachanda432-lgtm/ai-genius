@@ -10,6 +10,21 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+
+app.use(express.json({ limit: '12mb' }));
+app.use(express.urlencoded({ extended: true, limit: '12mb' }));
+app.use((req, res, next) => {
+  if (req.path === '/api/chat/stream') {
+    console.log('CHAT BODY DEBUG:', {
+      contentType: req.headers['content-type'],
+      contentLength: req.headers['content-length'],
+      bodyIsUndefined: req.body === undefined,
+      bodyType: typeof req.body,
+    });
+  }
+  next();
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
